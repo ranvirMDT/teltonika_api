@@ -43,6 +43,7 @@ try:
                     timestamp = data_n['timestamp']
                     
                     if timestamp > last_timestamp:
+                        print(data_n)
                         keys=list(data_n.keys())
                         # print(keys)
                         # vals=list(data_n.values())
@@ -93,7 +94,8 @@ try:
                             conn.commit()
                             print("Data successfully inserted!")
                             last_timestamp= timestamp
-
+                    else:
+                        pass
                     
 
             except mysql.connector.Error as error:
@@ -117,5 +119,5 @@ except ValueError as ve:
     print("Error Occured: {}".format(ve))
 
 finally:
-    time.sleep(60)
+    time.sleep(180)
 
