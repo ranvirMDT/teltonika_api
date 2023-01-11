@@ -3,6 +3,8 @@ import json
 import mysql.connector
 import time
 
+# NOTE: Script requires table with the columns that have the same name as JSON data key but with "_" instead of "." 
+
 
 try:
     # API url

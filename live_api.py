@@ -3,6 +3,11 @@ import json
 import mysql.connector
 import time
 
+
+# NOTE: Script requires table with the columns that have the same name as JSON data key but with "_" instead of "." 
+
+
+# Set timestamp as current time
 last_timestamp = int(time.time())
 # print(last_timestamp)
 
@@ -17,7 +22,7 @@ try:
         "Authorization": "15APdQKKk81AbhH5oBfp4MfzRg72z9tq2S34yBEJyw9xBEtP6y5Ya8oPflFEiZTa"
     }
 
-        # last_timestamp = None
+
     while True:
 
         # Send GET request to API with headers
@@ -38,10 +43,11 @@ try:
                 # Get cursor to perform operations on database
                 cursor = conn.cursor()
 
-
+                # iterate through each data row
                 for data_n in data_res:
                     timestamp = data_n['timestamp']
                     
+                    # Only proccess latest data
                     if timestamp > last_timestamp:
                         print(data_n)
                         keys=list(data_n.keys())
@@ -51,6 +57,7 @@ try:
                         column_name_list=[]
                         column_vals=[]
 
+                        # save column names as keys but using "_" instead of "." 
                         for key in keys:
                             column_name_list.append(key.replace('.','_'))
 
@@ -75,7 +82,7 @@ try:
 
 
                         sql_insert_query= f"INSERT INTO teltonikas({columns_string}) VALUES ("
-
+                        
                         for i in range(len(column_name_list)):
                             sql_insert_query += '%s, '
                         
@@ -83,6 +90,7 @@ try:
                         sql_insert_query = sql_insert_query[:-2]
                         sql_insert_query += ")"
 
+                        # Execute SQL insert query with data values
                         insert_tuple = tuple(column_vals)
                         cursor.execute(sql_insert_query, insert_tuple)
                         
