@@ -15,11 +15,11 @@ last_timestamp = int(time.time())
 try:
     last_timestamp = int(time.time())
     # API url
-    url = "https://flespi.io/gw/channels/1146871/messages"
+    url = "https://flespi.io/gw/channels/1147049/messages"
 
     # Set authorization header with token
     headers = {
-        "Authorization": "15APdQKKk81AbhH5oBfp4MfzRg72z9tq2S34yBEJyw9xBEtP6y5Ya8oPflFEiZTa"
+        "Authorization": "iZ82MaVoLY8o5wiKQzQLmsBBfLkxa4PgSO8uORGpFFEBZKbF9Pek7FLafVxdOdjw"
     }
 
 
