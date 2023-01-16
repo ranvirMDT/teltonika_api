@@ -11,23 +11,27 @@ import time
 last_timestamp = int(time.time())
 # print(last_timestamp)
 
+# API url
+url = "https://flespi.io/gw/channels/1147049/messages"
 
-try:
-    last_timestamp = int(time.time())
-    # API url
-    url = "https://flespi.io/gw/channels/1147049/messages"
+# Set authorization header with token
+headers = {
+    "Authorization": "iZ82MaVoLY8o5wiKQzQLmsBBfLkxa4PgSO8uORGpFFEBZKbF9Pek7FLafVxdOdjw"
+}
 
-    # Set authorization header with token
-    headers = {
-        "Authorization": "iZ82MaVoLY8o5wiKQzQLmsBBfLkxa4PgSO8uORGpFFEBZKbF9Pek7FLafVxdOdjw"
-    }
+max_retries = 10
+retry_count = 0
 
+while True:
+    try:
+    # last_timestamp = int(time.time())
 
-    while True:
+    
 
         # Send GET request to API with headers
         response = requests.get(url, headers=headers)
 
+        
         data= response.json()
         data_res=data['result']
         # print(data)
@@ -114,6 +118,7 @@ try:
                     cursor.close()
                     conn.close()
                     # print("MySQL connection is closed")
+                    retry_count = 0
                 
         else:
             # Print error message if request was not successful
@@ -121,11 +126,19 @@ try:
             print(response.text)
 
         
-except requests.exceptions.RequestException as e:
-    print("An Error Occured: {}".format(e))
-except ValueError as ve:
-    print("Error Occured: {}".format(ve))
+    except requests.exceptions.RequestException as e:
+        print("An Error Occured: {}".format(e))
+        retry_count += 1
+        print(f"Error: {e}. ")
+        print("Retrying in 30 seconds...")
+        if retry_count >= max_retries:
+            print("Max retries exceeded!")
+            break
+        time.sleep(30)
 
-finally:
-    time.sleep(180)
+    except ValueError as ve:
+        print("Error Occured: {}".format(ve))
+
+    finally:
+        time.sleep(360)
 
