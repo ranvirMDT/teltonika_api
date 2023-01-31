@@ -8,11 +8,11 @@ import time
 
 try:
     # API url
-    url = "https://flespi.io/gw/channels/1147049/messages"
+    url = "https://flespi.io/gw/channels/1149052/messages"
 
     # Set authorization header with token
     headers = {
-        "Authorization": "iZ82MaVoLY8o5wiKQzQLmsBBfLkxa4PgSO8uORGpFFEBZKbF9Pek7FLafVxdOdjw"
+        "Authorization": "9OTHeaQjRDAbIku4mDIU25SoYsGga2kaG1HIZlSHOiIlq1fAuLllG1zuh5yiXHgs"
     }
 
     # last_timestamp = None
