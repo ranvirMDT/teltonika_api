@@ -12,7 +12,7 @@ try:
 
     # Set authorization header with token
     headers = {
-        "Authorization": "9OTHeaQjRDAbIku4mDIU25SoYsGga2kaG1HIZlSHOiIlq1fAuLllG1zuh5yiXHgs"
+        "Authorization": "4RpVREWJQuv5mNmWqf0imFCkOlIyyu4s9jbOMVnqeGlqjxaxA0DMw5U8htwDLoWK"
     }
 
     # last_timestamp = None
@@ -31,7 +31,7 @@ try:
 
         try:
             # Connect to MySQL database
-            conn = mysql.connector.connect(user='root', password='', host='localhost', database='teltonika')
+            conn = mysql.connector.connect(user='root', password='', host='localhost', database='teltonika_web')
 
             # Get cursor to perform operations on database
             cursor = conn.cursor()
@@ -69,7 +69,7 @@ try:
                 
 
 
-                sql_insert_query= f"INSERT INTO teltonikas({columns_string}) VALUES ("
+                sql_insert_query= f"INSERT INTO tracker_logs({columns_string}) VALUES ("
 
                 for i in range(len(column_name_list)):
                     sql_insert_query += '%s, '
