@@ -49,10 +49,6 @@ try:
                 for key in keys:
                     column_name_list.append(key.replace('.','_'))
 
-                # print(column_name_list)
-
-                
-                
                 
                 for i,j in zip(column_name_list, keys):
                     i= data_n[f'{j}']
