@@ -2,6 +2,7 @@ import requests
 import json
 import mysql.connector
 import time
+from tqdm import tqdm
 
 # NOTE: Script requires table with the columns that have the same name as JSON data key but with "_" instead of "." 
 
@@ -35,10 +36,10 @@ try:
     ]
     # print(rows)
 
-    for row in rows:
+    for row in tqdm(rows):
         id, lat, lon = row["id"], row["latitude"], row["longitude"]
         address = reverse_geocode(lat, lon)
-        print(address)
+        # print(address)
 
         try:
             if address:
@@ -54,7 +55,7 @@ try:
             else:
                 # Commit changes to database
                 conn.commit()
-                print("Address successfully inserted!")
+                # print("Address successfully inserted!")
         except:
             print('query failed')
         
